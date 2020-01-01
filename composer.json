@@ -12,7 +12,8 @@
       "Model\\": "app/model",
       "Controller\\": "app/controller",
       "View\\": "app/view",
-      "Helper\\": "app/helper"
+      "Helper\\": "app/helper",
+      "Core\\": "app/core"
     }
   }
 }

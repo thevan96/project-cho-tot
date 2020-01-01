@@ -1,18 +1,18 @@
 <?php
-namespace Helper;
+namespace Core;
 
 use PDO;
 use PDOException;
 use PDOStatement;
 
-class DatabaseHelper
+class Database
 {
     private static $connect;
 
     public function getConnect()
     {
         $host = '127.0.0.1';
-        $db = 'productDB';
+        $db = 'chototDB';
         $charset = 'utf8';
         $username = 'root';
         $password = '123456789';
@@ -41,13 +41,13 @@ class DatabaseHelper
     {
         switch (gettype($value)) {
             case 'integer':
-                $stmt->bindParam($key, $value, PDO::PARAM_INT);
+                $stmt->bindValue($key, $value, PDO::PARAM_INT);
                 break;
             case 'boolean':
-                $stmt->bindParam($key, $value, PDO::PARAM_BOOL);
+                $stmt->bindValue($key, $value, PDO::PARAM_BOOL);
                 break;
             default:
-                $stmt->bindParam($key, $value, PDO::PARAM_STR);
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
         }
     }
 
@@ -66,7 +66,7 @@ class DatabaseHelper
         }
     }
 
-    public static function get(string $sql, array $paramater = null, int $styleFetch = PDO::FETCH_ASSOC): array
+    public static function get(string $sql, array $paramater = null, int $styleFetch = PDO::FETCH_ASSOC)
     {
         try {
             return self::runQuery($sql, $paramater)->fetchAll($styleFetch);

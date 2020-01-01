@@ -3,7 +3,7 @@ namespace Controller;
 
 use Core\Controller;
 
-class UserController extends Controller
+class RealEstalController extends Controller
 {
     public function __construct()
     {
