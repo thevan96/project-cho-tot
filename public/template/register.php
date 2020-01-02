@@ -1,4 +1,4 @@
-<div id ="container" class="w-50 p-2 border-0 mx-auto text-center mt-5 bg-light" style=" max-width: 450px">
+<div id ="container" class="w-50 p-2 border-0 mx-auto text-center mt-5 mb-5 bg-light" style=" max-width: 450px; height:450px;">
     <form method="post" action="<?= URLROOT ?>/user/register">
         <div class="form-group ">
             <strong>ĐĂNG KÝ</strong>

@@ -3,7 +3,7 @@ namespace Controller;
 
 use Core\Controller;
 
-class RealEstalController extends Controller
+class RealestalController extends Controller
 {
     public function __construct()
     {
@@ -11,5 +11,10 @@ class RealEstalController extends Controller
 
     public function index()
     {
+    }
+
+    public function add()
+    {
+        $this->renderView('realestal/add');
     }
 }
