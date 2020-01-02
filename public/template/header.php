@@ -6,18 +6,19 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
     <link
         rel="stylesheet"
-        href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+        href="<?= URLROOT ?>/public/assest/node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
-</head>
+</head
 <body>
 <div class="container-fullwidth" style="font-size: 12px">
     <nav class="navbar navbar-expand-lg navbar-light bg-warning" style="max-height: 50px">
         <div class="pl-5 ml-5">
         </div>
         <div class="pl-5 ml-5">
-            <a class="navbar-brand ml-5" href="#">
+            <a class="navbar-brand ml-5" href="<?= URLROOT ?>">
                 <img src="https://static.chotot.com/storage/marketplace/transparent_logo.png" alt="Chợ tốt" class="w-50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,12 +58,27 @@
                         <img src="https://static.chotot.com/storage/marketplace/common/moreActive.svg" alt="Thêm" style="width: 30px; height: 30px">
                         <b>Thêm</b>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">
-                            <img src="https://static.chotot.com/storage/marketplace/common/userActive.svg" alt="avatar" style="width: 30px; height: 30px">Đăng nhập
-                        </a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                    </div>
+                    <?php if (!$_SESSION['idUser']):?>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?= URLROOT ?>/user/login">
+                                Đăng nhập
+                            </a>
+                            <a class="dropdown-item" href="<?= URLROOT ?>/user/register">
+                                Đăng ký
+                            </a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    <?php else : ?>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?= URLROOT ?>/user/profile">
+                                Thông tin cá nhân
+                            </a>
+                            <a class="dropdown-item" href="<?= URLROOT ?>/user/logout">
+                                Đăng xuất
+                            </a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </div>
+                    <?php endif; ?>
                 </li>
                 <li class="nav-item">
                     <a class="btn mt-1" href="#" style="background-color: #ff751d">ĐĂNG TIN</a>
@@ -71,9 +87,8 @@
         </div>
     </nav>
 </div>
-
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/popper.js/dist/popper.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?= URLROOT ?>/public/assest/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="<?= URLROOT ?>/public/assest/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="<?= URLROOT ?>/public/assest/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

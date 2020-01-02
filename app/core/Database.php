@@ -11,11 +11,11 @@ class Database
 
     public function getConnect()
     {
-        $host = '127.0.0.1';
-        $db = 'chototDB';
-        $charset = 'utf8';
-        $username = 'root';
-        $password = '123456789';
+        $host = DB_HOST;
+        $db = DB_NAME;
+        $charset = DB_CHARSET;
+        $username = DB_USER;
+        $password = DB_PASS;
         $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
         $opt = [

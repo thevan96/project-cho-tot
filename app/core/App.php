@@ -50,7 +50,6 @@ class App
         if (count($url) > 2) {
             $this->params = array_slice($url, 2);
         }
-        var_dump($this->params);
     }
 
     public function run()
