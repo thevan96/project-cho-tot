@@ -6,10 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link
-        rel="stylesheet"
-        href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
 <div class="container-fullwidth" style="font-size: 12px">
@@ -17,7 +15,7 @@
         <div class="pl-5 ml-5">
         </div>
         <div class="pl-5 ml-5">
-            <a class="navbar-brand ml-5" href="#">
+            <a class="navbar-brand ml-5" href="home.php">
                 <img src="https://static.chotot.com/storage/marketplace/transparent_logo.png" alt="Chợ tốt" class="w-50">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,22 +56,27 @@
                         <b>Thêm</b>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="formLogin.php">
                             <img src="https://static.chotot.com/storage/marketplace/common/userActive.svg" alt="avatar" style="width: 30px; height: 30px">Đăng nhập
                         </a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="formRegister.php">Đăng ký</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="btn mt-1" href="#" style="background-color: #ff751d">ĐĂNG TIN</a>
+                    <a class="btn mt-1" href="postNews.php" style="background-color: #ff751d">ĐĂNG TIN</a>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
 
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/popper.js/dist/popper.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </html>
