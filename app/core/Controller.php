@@ -9,7 +9,7 @@ class Controller
     {
     }
 
-    public function renderView(string $view, array $data = [])
+    public function renderView(string $view, $data = [])
     {
         if (file_exists('app/view/' . $view . '.php')) {
             require_once sprintf('app/view/%s.php', $view);

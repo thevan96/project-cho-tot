@@ -9,7 +9,7 @@ class Database
 {
     private static $connect;
 
-    public function getConnect()
+    public static function getConnect()
     {
         $host = DB_HOST;
         $db = DB_NAME;

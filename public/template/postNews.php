@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="container text-center mt-3 " style="background-color: cornflowerblue; width: 300px">
+    <div class="container text-center mt-3 " style="background-color: cornflowerblue; width:500px">
         <h3 class="p-auto">Đăng tin</h3><br/>
-        <img class="mb-3" src="<?=URLROOT?>/public/assest/img/home.png" alt="home_icon" height="32">
+        <img class="mb-3" src="<?= URLROOT ?>/public/assest/img/home.png" alt="home_icon" height="32">
         <strong>Bất động sản</strong>
     </div>
     <div class="container mt-3">
-        <form action="#" method="post">
+        <form action="<?= URLROOT ?>/realestal/add" method="post" enctype="multipart/form-data">
             <ul class="list-group">
                 <div class="form-group">
                     <li class="list-group-item text-center">
@@ -14,53 +14,49 @@
                 </div>
                 <div class="form-group">
                     <li class="list-group-item">
-                        <p class="font-weight-bold">1.Mục đích đăng tin</p>
-                        <select class="custom-select">
-                            <option class="font-italic font-weight-light" selected>--chọn mục đích--</option>
-                            <option value="1">Cần bán</option>
-                            <option value="2">Cần mua</option>
-                            <option value="3">Cho thuê</option>
-                            <option value="4">Cần thuê</option>
+                        <p class="font-weight-bold">1. Mục đích đăng tin</p>
+                        <select class="custom-select" name="purpose">
+                            <option value="0" class="font-italic font-weight-light" selected>-- Chọn mục đích --</option>
+                            <?php foreach(FIELD_PURPOSE as $item) :?>
+                            <option value="<?=$item['idPurpose']?>"><?= $item['name']?></option>
+                            <?php endforeach; ?>
                         </select>
                     </li>
+                    <br>
                     <li class="list-group-item">
-                        <p class="font-weight-bold">2.Tên dự án(không bắt buộc)</p>
+                        <p class="font-weight-bold">2. Tiêu đề bài đăng</p>
                         <div class="row">
                             <div class="col-md-12">
-                                <form class="row">
-                                    <div class="col-12 col-sm pr-sm-0">
-                                        <input type="text" name="nameProject" placeholder="Nhập tên dự án"
-                                               class="form-control">
-                                    </div>
+                                <input type="text" value="<?=$data['title'] ?>" name="title" placeholder="Nhập tên dự án" class="form-control <?php echo (!empty($data['titleErr'])) ? 'is-invalid' : ''; ?> ">
+                                <div class="invalid-feedback">
+                                    <?php echo  $data['titleErr']; ?>
+                                </div>
                             </div>
                         </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
-                        <p class="font-weight-bold">3.Địa chỉ</p>
+                        <p class="font-weight-bold">3. Địa chỉ</p>
                         <div class="row">
                             <div class="col-md-12">
-                                <form class="row">
-                                    <div class="col-12 col-sm pr-sm-0">
-                                        <input type="text" name="address"
-                                               placeholder="Số nhà, Đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố  "
-                                               class="form-control">
-                                    </div>
+                                <input type="text"  value="<?= $data['address']?>" name="address" placeholder="Số nhà, Đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố  " class="form-control <?php echo (!empty($data['addressErr'])) ? 'is-invalid' : ''; ?> ">
+                                <div class="invalid-feedback">
+                                    <?php echo  $data['addressErr']; ?>
+                                </div>
                             </div>
                         </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
                         <p class="font-weight-bold ">4.Bạn là</p>
                         <div class="col-md-12">
-                            <form action="" class="row ">
-                                <div class="form-check form-check-inline ">
-                                    <input class="form-check-input" id="caNhan" type="radio" name="typeOwn" value="caNhan">
-                                    <label class="form-check-label" for="caNhan">Cá nhân</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" id="Môi giới" class="form-check-input ml-3" name="typeOwn"
-                                           value="moiGioi">
-                                    <label for="moiGioi" class="form-check-label">Môi giới</label>
-                                </div>
+                            <form action="" class="row">
+                                <?php foreach(FIELD_TYPEOWN as $item) :?>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" id="<?=$item['idTypeOwn']?>" type="radio" name="typeOwn" value="<?=$item['idTypeOwn']?>">
+                                        <label class="form-check-label" for="<?=$item['idTypeOwn']?>"><?= $item['name'] ?></label>
+                                    </div>
+                                <?php endforeach; ?>
                             </form>
                         </div>
                         <div class="col-md-12 mt-2" style="background-color: #b8fff5">
@@ -76,41 +72,48 @@
                             </div>
                         </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
                         <p class="font-weight-bold">5.Hình ảnh mô động sản</p>
                         <div style="background-color: #ff875f">
-                            <p class="text-center">* Bạn cần đăng 3 ảnh!</p>
+                            <p class="text-center">* Bạn cần đăng tối thiểu 3 ảnh (PNG/SVG)</p>
+                            <div class="form-group inline">
+                                <!--<input type="file" class="form-control-file" id="photo" value="photo" name='imageUpload[]' multiple> -->
+                                <input type='file' class="form-control-file mb-2" id="photo" value="photo" name='imageUpload[]'  multiple onchange="readURL(this);" />
+                                <img style="max-width:180px" src="http://placehold.it/180" id="photo0" alt="your image" />
+                                <img style="max-width:180px" src="http://placehold.it/180" id="photo1" alt="your image" />
+                                <img style="max-width:180px" src="http://placehold.it/180" id="photo2" alt="your image" />
+                            </div>
                         </div>
-                        <form>
-                            <div class="form-group">
-                                <input type="file" class="form-control-file" id="photo" value="photo" multiple>
+                        <div class="col-md-12 mt-2" style="background-color: #b8fff5">
+                            <div class="">
+                                <p class="font-weight-bold">Để bán nhanh hơn</p>
+                                <p>+ Chụp hình khổ ngang, chính diện, xung quanh và phía trước thửa đất</p>
                             </div>
-                            <div class="col-md-12 mt-2" style="background-color: #b8fff5">
-                                <div class="">
-                                    <p class="font-weight-bold">Để bán nhanh hơn</p>
-                                    <p>+ Chụp hình khổ ngang, chính diện, xung quanh và phía trước thửa đất</p>
-                                </div>
-                                <div class="">
-                                    <strong>Không:</strong>
-                                    <p><em>+ Sử dụng hình ảnh trùng lặp hoặc lấy từ Internet</em></p>
-                                    <p><em>+ Chèn số điện thoại/email/logo vào hình</em></p>
-                                </div>
+                            <div class="">
+                                <strong>Không:</strong>
+                                <p><em>+ Sử dụng hình ảnh trùng lặp hoặc lấy từ Internet</em></p>
+                                <p><em>+ Chèn số điện thoại/email/logo vào hình</em></p>
                             </div>
-                        </form>
+                        </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
                         <p class="font-weight-bold">6.Giá tổng</p>
                         <div class="input-group mb-3 col-md-12">
-                            <input type="number" class="form-control" name="value">
+                            <input type="number" class="form-control <?php echo (!empty($data['valueErr'])) ? 'is-invalid' : ''; ?>" name="value" value="<?= strval($data['value'])?>">
                             <div class="input-group-append">
                                 <span class="input-group-text bg-light">đ</span>
+                            </div>
+                            <div class="invalid-feedback">
+                                <?php echo  $data['valueErr']; ?>
                             </div>
                         </div>
                         <small class="font-italic">Vui lòng điền tổng giá tiền</small>
                         <div class="col-md-12 mt-2" style="background-color: #b8fff5">
                             <div class="">
                                 <p class="font-weight-bold">Điền tổng giá bán bằng VNĐ</p>
-                                <p><em>+ Ví dụ: điền 2.300.000.000 đ (2 tỷ 3) thay vì 2.300 hay 2.3</em></p>
+                                <p><em>+ Ví dụ: điền 2 300 000 000 đ (2 tỷ 3) thay vì 2.300 hay 2.3</em></p>
                             </div>
                             <div class="">
                                 <p class="font-weight-bold">Không điền giá/m2</p>
@@ -118,18 +121,17 @@
                             </div>
                         </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
                         <p class="font-weight-bold">7.Diện tích</p>
                         <div class="input-group mb-3 col-md-12">
-                            <input type="number" class="form-control" name="area" placeholder="Nhập diện tích">
+                            <input type="number" value="<?= strval($data['area']) ?>" class="form-control <?php echo (!empty($data['areaErr'])) ? 'is-invalid' : ''; ?>" name="area" placeholder="Nhập diện tích">
                             <div class="input-group-append">
                                 <span class="input-group-text bg-light">m<sup>2</sup></span>
                             </div>
-                        </div>
-                        <div>
-                            <p class="text-left font-italic"><small>Điền tiêu đề để thu hút nhiều lượt xem tin hơn.</small>
-                            </p>
-                            <small class="text-right font-weight-lighter">Tối đa 50 từ</small>
+                            <div class="invalid-feedback">
+                                <?php echo  $data['areaErr']; ?>
+                            </div>
                         </div>
                         <div class="col-md-12 mt-2" style="background-color: #b8fff5">
                             <div class="">
@@ -146,18 +148,23 @@
                             </div>
                         </div>
                     </li>
+                    <br>
                     <li class="list-group-item">
                         <div class="col-md-12 mt-2">
                             <p class="font-weight-bold">8.Mô tả chi tiết</p>
                             <em class="font-weight-lighter">- Mô tả bằng tiếng Việt có dấu</em><br>
                             <small class="font-weight-lighter ml-4">+ Tiện ích xung quanh khu đất</small><br>
                             <small class="font-weight-lighter ml-4">+ Thời gian đến khu trung tâm</small><br>
-                            <small class="font-weight-lighter ml-4">+ Thời gian đến bệnh viện, trường học, siêu thị gần
-                                nhất</small>
+                            <small class="font-weight-lighter ml-4">+ Thời gian đến bệnh viện, trường học, siêu thị gần nhất</small>
                         </div>
                         <div class="col-md-12 mt-2 col-sm pr-sm-0">
                             <div class="input-group">
-                                <textarea name="description " id="description " rows="6" class="form-control"></textarea>
+                                <textarea name="description" id="description" rows="6" class="form-control <?php echo (!empty($data['descriptionErr'])) ? 'is-invalid' : ''; ?>">
+                                    <?= $data['description']?>
+                                </textarea>
+                                <div class="invalid-feedback">
+                                    <?php echo  $data['descriptionErr']; ?>
+                                </div>
                             </div>
                             <div class="mt-2" style="background-color: #ff875f">
                                 <p class="text-center">*Vui lòng mô tả với ít nhất 10 từ!</p>
@@ -192,3 +199,37 @@
         document.documentElement.scrollTop = 0;
     }
 </script>
+   <script>
+   function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#photo0')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        if (input.files && input.files[1]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#photo1')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[1]);
+        }
+
+        if (input.files && input.files[2]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#photo2')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[2]);
+        }
+    }
+
+   </script>

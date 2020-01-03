@@ -3,6 +3,7 @@ namespace Model;
 
 class RealEstalModel
 {
+
     private $idRealEstale;
     private $title;
     private $description;

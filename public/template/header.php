@@ -62,7 +62,7 @@
                             <img src="https://static.chotot.com/storage/marketplace/common/moreActive.svg" alt="Thêm" style="width: 30px; height: 30px">
                             <b>Thêm</b>
                         </a>
-                        <?php if (!$_SESSION['idUser']): ?>
+                        <?php if ($_SESSION['idUser'] === null): ?>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="<?= URLROOT ?>/user/login">
                                     Đăng nhập
@@ -85,7 +85,7 @@
                         <?php endif; ?>
                     </li>
                     <li class="nav-item">
-                        <a class="btn mt-1" href="<?= URLROOT ?>/realEstal/add" style="background-color: #ff751d">ĐĂNG TIN</a>
+                        <a class="btn mt-1" href="<?= URLROOT ?>/realestal/add" style="background-color: #ff751d">ĐĂNG TIN</a>
                     </li>
                 </ul>
             </div>

@@ -19,20 +19,20 @@ class UserController extends Controller
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $phone = trim($_POST['phone']);
-            $password = trim($_POST['password']);
-            $sql = "SELECT idUser, firstName, lastName, password, phone FROM User WHERE phone = $phone";
-            $account = Database::get($sql);
+            $data['phone'] = trim($_POST['phone']);
+            $data['password'] = trim($_POST['password']);
 
-            $data['phone'] = $phone;
-            $data['password'] = $password;
+            $sql = sprintf(
+                'SELECT idUser, firstName, lastName, password, phone FROM User WHERE phone = %s',
+                $data['phone']
+            );
+            $account = Database::get($sql);
             $hashed_password = $account[0]['password'];
-            if ($phone !== $account[0]['phone']) {
+            if (count($account) < 1){
                 $data['phoneErr'] = 'Tài khoản không tồn tại';
             }
 
-            if (password_verify($password, $hashed_password)) {
-            } else {
+            if (!password_verify($data['password'], $hashed_password)) {
                 $data['passwordErr'] =
                     'Mật khẩu sai hoặc tài khoản không tồn tại';
             }

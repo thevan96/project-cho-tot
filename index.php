@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-use Controller\UserController;
 use Core\App;
 
 require_once 'vendor/autoload.php';
